@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +30,7 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {
         // Required empty public constructor
+
     }
 
     /**
@@ -53,12 +58,30 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View v= inflater.inflate(R.layout.fragment_home, container, false);
+//        ListView listView=v.findViewById(R.id.todaysEvents);
+//        ArrayList<String> events=new ArrayList<>();
+//        events.add("Python");
+//        events.add("java");
+//        events.add("c");
+//        events.add("c++");
+//        events.add("Python");
+//        events.add("java");
+//        events.add("c");
+//        events.add("c++");
+//        events.add("Python");
+//        events.add("java");
+//        events.add("c");
+//        events.add("c++");
+//        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,events);
+//    listView.setAdapter(arrayAdapter);
+        return v;
     }
 }
