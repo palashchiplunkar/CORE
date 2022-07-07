@@ -73,7 +73,7 @@ public class loginActivity extends AppCompatActivity {
 
                             }else{
                                 loadingPB.setVisibility(View.GONE);
-                                Toast.makeText(loginActivity.this,"Failed to signin!",Toast.LENGTH_LONG).show();
+                                Toast.makeText(loginActivity.this,"Failed! Please Check your Credentials",Toast.LENGTH_LONG).show();
 
                             }
                         }

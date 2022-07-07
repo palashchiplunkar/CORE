@@ -23,7 +23,8 @@
         android:fontFamily="sans-serif"
         android:text="ADMIN LOGIN"
         android:textColor="@color/background"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 
     <LinearLayout
@@ -73,7 +74,7 @@
         android:layout_gravity="right"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:background="#420606"
+        android:backgroundTint="#810303"
         android:elevation="0dp"
         android:text="SIGN IN"
         android:textColor="#fff" />

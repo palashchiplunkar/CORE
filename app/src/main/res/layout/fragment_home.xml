@@ -50,8 +50,9 @@
             android:id="@+id/signout"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginLeft="300dp"
+            android:layout_marginLeft="250dp"
             android:layout_marginTop="20dp"
+            android:backgroundTint="#810303"
             android:text="SIGN OUT" />
 
     </FrameLayout>

@@ -22,7 +22,8 @@
         android:fontFamily="sans-serif"
         android:text="WELCOME TO CORE"
         android:textColor="@color/background"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 
 
@@ -74,6 +75,7 @@
         android:indeterminate="true"
         android:indeterminateDrawable="@drawable/progress_back"
         android:visibility="gone" />
+
     <Button
         android:id="@+id/admin_sign_in"
         android:layout_width="match_parent"
@@ -81,7 +83,7 @@
         android:layout_gravity="right"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:background="#420606"
+        android:backgroundTint="#810303"
         android:elevation="0dp"
         android:text="SIGN IN"
         android:textColor="#fff" />
@@ -97,6 +99,7 @@
         android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#810303"
         android:text="Register Now" />
 
     <TextView
@@ -110,6 +113,7 @@
         android:id="@+id/admin_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#810303"
         android:text="ADMIN LOGIN" />
 
 
