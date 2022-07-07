@@ -1,5 +1,6 @@
 package com.example.core;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -66,6 +71,20 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home, container, false);
+        Button signOut;
+        FirebaseAuth mauth=FirebaseAuth.getInstance();
+        signOut=v.findViewById(R.id.signout);
+        signOut.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mauth.signOut();
+                        Toast.makeText(getContext(),"Signed out!",Toast.LENGTH_LONG).show();
+                        Intent i=new Intent(getContext(),loginActivity.class);
+                        startActivity(i);
+                    }
+                }
+        );
 //        ListView listView=v.findViewById(R.id.todaysEvents);
 //        ArrayList<String> events=new ArrayList<>();
 //        events.add("Python");
