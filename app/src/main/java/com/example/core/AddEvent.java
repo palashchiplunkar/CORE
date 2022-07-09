@@ -1,59 +1,140 @@
 package com.example.core;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Random;
 
-public class AddEvent extends AppCompatActivity {
+public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
     DatabaseReference myRef=database.getReference("events");
-    Random random = new Random();
-    EditText Topic,Person,date,time,duration,description;
+
+    EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,plink,flink;
+    String desig,eventID;
     Button Submit_btn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+        Spinner spinner = (Spinner) findViewById(R.id.designation);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.designation_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         Topic=findViewById(R.id.topic);
         Person=findViewById(R.id.person);
         date=findViewById(R.id.date);
-        time=findViewById(R.id.time);
-        duration=findViewById(R.id.duration);
+        start_time=findViewById(R.id.time);
         description=findViewById(R.id.desc);
+        end_time=findViewById(R.id.end_time);
+        venue=findViewById(R.id.venue);
+        ph1=findViewById(R.id.ph1);
+        ph2=findViewById(R.id.ph2);
+        name1=findViewById(R.id.name1);
+        name2=findViewById(R.id.name2);
+        flink=findViewById(R.id.formLink);
+        plink=findViewById(R.id.posterLink);
         Submit_btn=findViewById(R.id.submit_btn);
         Submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    int y = random.nextInt(1000);
+
                     String topic=Topic.getText().toString();
                     String person=Person.getText().toString();
                     String date1=date.getText().toString();
-                    String time1=time.getText().toString();
-                    String dura=duration.getText().toString();
+                    String st_time=start_time.getText().toString();
+                    String ed_time=end_time.getText().toString();
                     String desc=description.getText().toString();
-                    GetEvents getEvents=new GetEvents(topic,person,date1,time1,dura,desc);
-                    myRef.child(Integer.toString(y)).setValue(getEvents);
-                    Toast.makeText(getApplicationContext(),"Event Added Succesfully!",Toast.LENGTH_LONG).show();
-                    Topic.setText("");
-                    Person.setText("");
-                    date.setText("");
-                    time.setText("");
-                    duration.setText("");
-                    description.setText("");
+                    String ven=venue.getText().toString();
+                    String ph11=ph1.getText().toString();
+                    String ph22=ph2.getText().toString();
+                    String name11=name1.getText().toString();
+                    String name22=name2.getText().toString();
+                    String pl=plink.getText().toString();
+                    String fl=flink.getText().toString();
+                    eventID=topic;
+                    GetEvents getEvents=new GetEvents(topic,desig,person,date1,st_time,ed_time,ven,desc,ph11,ph22,name11,name22,eventID,fl,pl);
+//                    myRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                            myRef.child(eventID).setValue(getEvents);
+//                            Toast.makeText(AddEvent.this,"Event Added!",Toast.LENGTH_LONG).show();
+//                            Intent i=new Intent(AddEvent.this,AdminHome.class);
+//                            startActivity(i);
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            Toast.makeText(AddEvent.this,""+databaseError,Toast.LENGTH_LONG).show();
+//
+//                        }
+//                    });
+                myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful()){
+                            Topic.setText("");
+                            date.setText("");
+                            ph1.setText("");
+                            ph2.setText("");
+                            venue.setText("");
+                            Person.setText("");
+                            name2.setText("");
+                            end_time.setText("");
+                            start_time.setText("");
+                            description.setText("");
+                            name1.setText("");
+                            flink.setText("");
+                            plink.setText("");
+                            Toast.makeText(AddEvent.this,"Event Added!",Toast.LENGTH_SHORT).show();
+                            Intent i =new Intent(AddEvent.this,AdminHome.class);
+                            startActivity(i);
+                        }else {
+                            Toast.makeText(AddEvent.this,"Failed to Add a Event!",Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+                });
 
             }
+
+
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        desig=adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

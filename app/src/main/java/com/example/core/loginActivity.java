@@ -34,7 +34,7 @@ public class loginActivity extends AppCompatActivity {
         loadingPB=findViewById(R.id.PBLoading);
         register=findViewById(R.id.register_btn);
         admin=findViewById(R.id.admin_btn);
-        signin=findViewById(R.id.admin_sign_in);
+        signin=findViewById(R.id.submit_btn);
         email=findViewById(R.id.username);
         pass=findViewById(R.id.password_admin);
         register.setOnClickListener(new View.OnClickListener() {

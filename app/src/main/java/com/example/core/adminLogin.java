@@ -16,7 +16,7 @@ public class adminLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
-        admin_signin=findViewById(R.id.admin_sign_in);
+        admin_signin=findViewById(R.id.submit_btn);
         uname=findViewById(R.id.username);
         pass=findViewById(R.id.password_admin);
         admin_signin.setOnClickListener(new View.OnClickListener() {
