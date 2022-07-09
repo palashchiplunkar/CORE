@@ -223,13 +223,14 @@
                 android:layout_height="wrap_content"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/submit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="#810303"
             android:elevation="0dp"
             android:text="Submit"
