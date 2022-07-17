@@ -45,6 +45,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                     eventClickInterFace.onUpdateClick(position);
                 }
             });
+
     }
 
     @Override
@@ -58,12 +59,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             super(itemView);
             TopicName= itemView.findViewById(R.id.topic_events);
             Date=itemView.findViewById(R.id.date_events);
-            View_btn=itemView.findViewById(R.id.view);
+            //View_btn=itemView.findViewById(R.id.view_user);
             Update=itemView.findViewById(R.id.update);
         }
     }
     public interface EventClickInterFace{
-        //void onEventClick(int position);
+        //void onViewClick(int position);
         void onUpdateClick(int position);
     }
 }

@@ -2,8 +2,13 @@ package com.example.core;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,10 +40,12 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
     Button Submit_btn;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
+
         Spinner spinner = (Spinner) findViewById(R.id.designation);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.designation_array, android.R.layout.simple_spinner_item);
@@ -78,22 +85,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     String fl=flink.getText().toString();
                     eventID=topic;
                     GetEvents getEvents=new GetEvents(topic,desig,person,date1,st_time,ed_time,ven,desc,ph11,ph22,name11,name22,eventID,fl,pl);
-//                    myRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //
-//                            myRef.child(eventID).setValue(getEvents);
-//                            Toast.makeText(AddEvent.this,"Event Added!",Toast.LENGTH_LONG).show();
-//                            Intent i=new Intent(AddEvent.this,AdminHome.class);
-//                            startActivity(i);
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            Toast.makeText(AddEvent.this,""+databaseError,Toast.LENGTH_LONG).show();
-//
-//                        }
-//                    });
                 myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
@@ -112,8 +104,26 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                             flink.setText("");
                             plink.setText("");
                             Toast.makeText(AddEvent.this,"Event Added!",Toast.LENGTH_SHORT).show();
+                            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+
+                                NotificationChannel notificationChannel=new NotificationChannel("My Notification","My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+                                NotificationManager notificationManager=getSystemService(NotificationManager.class);
+                                notificationManager.createNotificationChannel(notificationChannel);
+                            }
+                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"My Notification");
+
+                            builder.setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                                    .setContentTitle("New Event Scheduled")
+                                    .setContentText(topic)
+                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            builder.setAutoCancel(true);
+                            NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(getApplicationContext());
+                            notificationManagerCompat.notify(1,builder.build());
+
                             Intent i =new Intent(AddEvent.this,AdminHome.class);
                             startActivity(i);
+
+
                         }else {
                             Toast.makeText(AddEvent.this,"Failed to Add a Event!",Toast.LENGTH_LONG).show();
 

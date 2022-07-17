@@ -16,8 +16,8 @@
         android:background="@drawable/gradient_drawable">
 
         <TextView
-            android:id="@+id/topic_events"
-            android:layout_width="wrap_content"
+            android:id="@+id/topic_events_user"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="20dp"
@@ -30,10 +30,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/date_events"
+            android:id="@+id/date_events_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/topic_events"
+            android:layout_below="@+id/topic_events_user"
             android:layout_alignParentLeft="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
@@ -45,7 +45,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/update"
+            android:id="@+id/view_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -55,7 +55,7 @@
             android:layout_marginRight="9dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="#FFFFFF"
-            android:text="Update"
+            android:text="View Details"
             android:textColor="@color/black" />
 
     </RelativeLayout>
