@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +47,18 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Successfull";
+                        if (!task.isSuccessful()) {
+                            msg = "failed";
+                        }
+                        System.out.println(task.getResult());
+                        //Toast.makeText(AddEvent.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
         Spinner spinner = (Spinner) findViewById(R.id.designation);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.designation_array, android.R.layout.simple_spinner_item);
@@ -110,16 +123,9 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                                 NotificationManager notificationManager=getSystemService(NotificationManager.class);
                                 notificationManager.createNotificationChannel(notificationChannel);
                             }
-                            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"My Notification");
 
-                            builder.setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-                                    .setContentTitle("New Event Scheduled")
-                                    .setContentText(topic)
-                                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            builder.setAutoCancel(true);
-                            NotificationManagerCompat notificationManagerCompat=NotificationManagerCompat.from(getApplicationContext());
-                            notificationManagerCompat.notify(1,builder.build());
-
+                            FcmNotificationsSender fcmNotificationsSender=new FcmNotificationsSender("/topics/general","A new Event Scheduled",topic,getApplicationContext(),AddEvent.this);
+                            fcmNotificationsSender.SendNotifications();
                             Intent i =new Intent(AddEvent.this,AdminHome.class);
                             startActivity(i);
 

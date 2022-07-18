@@ -3,6 +3,7 @@ package com.example.core;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,7 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
@@ -71,6 +75,19 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_home, container, false);
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Successfull";
+                        if (!task.isSuccessful()) {
+                            msg = "failed";
+                        }
+                        //System.out.println(task.getResult());
+                        //Text(getContext(), msg, Toast.LENGTH_SHORT).showoast.makeT();
+                    }
+                });
+
         Button signOut;
         FirebaseAuth mauth=FirebaseAuth.getInstance();
         signOut=v.findViewById(R.id.signout);
@@ -85,22 +102,6 @@ public class HomeFragment extends Fragment {
                     }
                 }
         );
-//        ListView listView=v.findViewById(R.id.todaysEvents);
-//        ArrayList<String> events=new ArrayList<>();
-//        events.add("Python");
-//        events.add("java");
-//        events.add("c");
-//        events.add("c++");
-//        events.add("Python");
-//        events.add("java");
-//        events.add("c");
-//        events.add("c++");
-//        events.add("Python");
-//        events.add("java");
-//        events.add("c");
-//        events.add("c++");
-//        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,events);
-//    listView.setAdapter(arrayAdapter);
         return v;
     }
 }
