@@ -98,7 +98,6 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     String fl=flink.getText().toString();
                     eventID=topic;
                     GetEvents getEvents=new GetEvents(topic,desig,person,date1,st_time,ed_time,ven,desc,ph11,ph22,name11,name22,eventID,fl,pl);
-//
                 myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {

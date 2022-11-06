@@ -97,8 +97,10 @@ public class HomeFragment extends Fragment {
                     public void onClick(View view) {
                         mauth.signOut();
                         Toast.makeText(getContext(),"Signed out!",Toast.LENGTH_LONG).show();
+
                         Intent i=new Intent(getContext(),loginActivity.class);
                         startActivity(i);
+
                     }
                 }
         );
