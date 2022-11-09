@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
 
                         Intent i=new Intent(getContext(),loginActivity.class);
                         startActivity(i);
-
+                        getActivity().finish();
                     }
                 }
         );

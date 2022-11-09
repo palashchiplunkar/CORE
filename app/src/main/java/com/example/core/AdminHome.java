@@ -11,9 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +33,8 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
     ProgressBar loadingPB;
     DatabaseReference myRef;
     GetEvents getEvents;
+    Button signout;
+    FirebaseAuth mauth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,17 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
         addEvent=findViewById(R.id.addEvent);
         eventList=findViewById(R.id.eventsView);
         loadingPB=findViewById(R.id.PBLoading);
+        signout=findViewById(R.id.signout_admin);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mauth.signOut();
+                Toast.makeText(getApplicationContext(),"Signed out!",Toast.LENGTH_LONG).show();
+                Intent i=new Intent(getApplicationContext(),loginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         addEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

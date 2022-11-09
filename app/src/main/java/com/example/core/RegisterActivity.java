@@ -100,11 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 users.put("Name",na);
                                 users.put("Email",em);
                                 users.put("USN",us);
-                                users.put("Year",year_submit[0]);
-                                users.put("Section",section_submit[0]);
+                                users.put("year",year_submit[0]);
+                                users.put("section",section_submit[0]);
+                                users.put("isAdmin","false");
                                     //GetUsers getUsers=new GetUsers(em,na,us);
-                                    String stamp=Long.toString(System.currentTimeMillis());
-                                    myRef.child(year_submit[0]).child(section_submit[0]).push().setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    //String stamp=Long.toString(System.currentTimeMillis());
+                                    myRef.child("year-"+year_submit[0]).child(section_submit[0]).push().setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
