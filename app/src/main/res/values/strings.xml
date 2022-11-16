@@ -31,5 +31,7 @@
     </string-array>
     <string name="location">AUDI 2</string>
     <string name="desc">This the peer learning session on the cloud computing and the BigData Analysis.Which is widely used in the current era.Used in the area of statistical user view detection and in the market analysis against the previous data.</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 </resources>

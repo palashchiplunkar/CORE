@@ -90,20 +90,20 @@ public class HomeFragment extends Fragment {
 
         Button signOut;
         FirebaseAuth mauth=FirebaseAuth.getInstance();
-        signOut=v.findViewById(R.id.signout);
-        signOut.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mauth.signOut();
-                        Toast.makeText(getContext(),"Signed out!",Toast.LENGTH_LONG).show();
-
-                        Intent i=new Intent(getContext(),loginActivity.class);
-                        startActivity(i);
-                        getActivity().finish();
-                    }
-                }
-        );
+//        signOut=v.findViewById(R.id.signout);
+//        signOut.setOnClickListener(
+//                new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        mauth.signOut();
+//                        Toast.makeText(getContext(),"Signed out!",Toast.LENGTH_LONG).show();
+//
+//                        Intent i=new Intent(getContext(),loginActivity.class);
+//                        startActivity(i);
+//                        getActivity().finish();
+//                    }
+//                }
+//        );
         return v;
     }
 }

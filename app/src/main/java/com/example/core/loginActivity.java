@@ -1,7 +1,10 @@
 package com.example.core;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,10 +41,20 @@ public class loginActivity extends AppCompatActivity {
     FirebaseAuth mauth=FirebaseAuth.getInstance();
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
     DatabaseReference myRef=database.getReference("users");
+
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+
         loadingPB=findViewById(R.id.PBLoading);
         register=findViewById(R.id.register_btn);
         forgot_pass=findViewById(R.id.forgot_pass);
@@ -76,38 +90,7 @@ public class loginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                myRef.child("admins").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        boolean flag=false;
-                                        for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-
-                                            if(snapshot.child("isAdmin").getValue().equals("true") && snapshot.child("Email").getValue().equals(em)){
-                                                flag=true;
-                                                break;
-                                            }
-                                        }
-                                        loadingPB.setVisibility(View.GONE);
-
-                                        if(flag){
-                                            Toast.makeText(loginActivity.this,"Welcome Back!",Toast.LENGTH_LONG).show();
-                                            Intent i = new Intent(loginActivity.this,AdminHome.class);
-                                            startActivity(i);
-                                            finish();
-                                        }else{
-                                            Toast.makeText(loginActivity.this,"Welcome Back!",Toast.LENGTH_LONG).show();
-                                            Intent i = new Intent(loginActivity.this,MainActivity.class);
-                                            startActivity(i);
-                                            finish();
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
+                                intentProtector(em);
 
 
                             }else{
@@ -122,15 +105,51 @@ public class loginActivity extends AppCompatActivity {
         });
     }
 
+    private void intentProtector(String email) {
+        myRef.child("admins").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean flag=false;
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+
+                    if(snapshot.child("isAdmin").getValue().equals("true") && snapshot.child("Email").getValue().equals(email)){
+                        flag=true;
+                        break;
+                    }
+                }
+                loadingPB.setVisibility(View.GONE);
+
+                if(flag){
+                    Toast.makeText(loginActivity.this,"Welcome Back!",Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(loginActivity.this,AdminHome.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Toast.makeText(loginActivity.this,"Welcome Back!",Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(loginActivity.this,MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser user=mauth.getCurrentUser();
-        if(user!=null){
-            Intent i = new Intent(loginActivity.this,MainActivity.class);
-            startActivity(i);
-            this.finish();
+        if(user!=null) {
+
+           intentProtector(user.getEmail());
+
         }
+
     }
 
 }

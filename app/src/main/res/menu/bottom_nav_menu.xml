@@ -7,4 +7,7 @@
     <item android:title="Events"
         android:icon="@drawable/ic_baseline_event_24"
         android:id="@+id/events"/>
+    <item android:title="Profile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:id="@+id/profile"/>
 </menu>
