@@ -65,6 +65,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/forgot_pass"
         android:layout_width="match_parent"
@@ -73,15 +78,15 @@
         android:layout_marginTop="10dp"
         android:textAlignment="textEnd"
         android:textSize="16sp" />
-    <ProgressBar
-        android:id="@+id/PBLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginLeft="165dp"
-        android:indeterminate="true"
-        android:indeterminateDrawable="@drawable/progress_back"
-        android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/PBLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/progress_back"
+            android:visibility="gone" />
 
     <Button
         android:id="@+id/submit_btn"
@@ -109,5 +114,5 @@
         android:backgroundTint="#810303"
         android:text="Register Now" />
 
-
+    </LinearLayout>
 </LinearLayout>

@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,30 +48,60 @@ public class view_details extends AppCompatActivity {
             date_user.setText(getEvents.getDate());
             start_time_user.setText(getEvents.getStartTime());
             end_time_user.setText(getEvents.getEndTime());
-            description_user.setText(getEvents.getDescription());
             venue_user.setText(getEvents.getVenue());
-            ph1_user.setText(getEvents.getEventHandlerPh1());
-            ph2_user.setText(getEvents.getEventHandlerPh2());
-            name1_user.setText(getEvents.getEventHandlerName1());
-            name2_user.setText(getEvents.getEventHandlerName2());
+            if(TextUtils.isEmpty(getEvents.getEventHandlerPh1())){
+                ph1_user.setText("No information availbale");
+            }else {
+                ph1_user.setText(getEvents.getEventHandlerPh1());
+            }
+            if(TextUtils.isEmpty(getEvents.getEventHandlerPh2())){
+                ph2_user.setText("No information availbale");
+            }else {
+                ph2_user.setText(getEvents.getEventHandlerPh2());
+            }
+            if(TextUtils.isEmpty(getEvents.getEventHandlerName1())){
+                name1_user.setText("No information availbale");
+            }else {
+                name1_user.setText(getEvents.getEventHandlerName1());
+            }
+            if(TextUtils.isEmpty(getEvents.getEventHandlerName2())){
+                name2_user.setText("No information availbale");
+            }else {
+                name2_user.setText(getEvents.getEventHandlerName2());
+            }
+            if(TextUtils.isEmpty(getEvents.getDescription())){
+                description_user.setText("No information availbale");
+            }else {
+                description_user.setText(getEvents.getDescription());
+            }
             eventID_user=getEvents.getEventsId();
         }
         download_btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = getEvents.getPosterLink();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                try {
+                    String url = getEvents.getPosterLink();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"No details found",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         register_btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url=getEvents.getFormLink();
-                Intent i=new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+                try {
+                    String url = getEvents.getFormLink();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"No details found",Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
     }

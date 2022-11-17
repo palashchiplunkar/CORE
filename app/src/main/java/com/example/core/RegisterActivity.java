@@ -124,7 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }else{
                                 loadingPB.setVisibility(View.GONE);
-                                Toast.makeText(RegisterActivity.this,"Failed to register!",Toast.LENGTH_LONG).show();
+
+                                Toast.makeText(RegisterActivity.this,task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
 
                             }
                         }

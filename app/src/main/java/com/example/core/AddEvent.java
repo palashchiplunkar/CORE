@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -97,46 +98,52 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     String pl=plink.getText().toString();
                     String fl=flink.getText().toString();
                     eventID=topic;
-                    GetEvents getEvents=new GetEvents(topic,desig,person,date1,st_time,ed_time,ven,desc,ph11,ph22,name11,name22,eventID,fl,pl);
-                myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if(task.isSuccessful()){
-                            Topic.setText("");
-                            date.setText("");
-                            ph1.setText("");
-                            ph2.setText("");
-                            venue.setText("");
-                            Person.setText("");
-                            name2.setText("");
-                            end_time.setText("");
-                            start_time.setText("");
-                            description.setText("");
-                            name1.setText("");
-                            flink.setText("");
-                            plink.setText("");
-                            Toast.makeText(AddEvent.this,"Event Added!",Toast.LENGTH_SHORT).show();
-                            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
 
-                                NotificationChannel notificationChannel=new NotificationChannel("My Notification","My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-                                NotificationManager notificationManager=getSystemService(NotificationManager.class);
-                                notificationManager.createNotificationChannel(notificationChannel);
-                            }
-
-                            FcmNotificationsSender fcmNotificationsSender=new FcmNotificationsSender("/topics/general","A new Event Scheduled",topic,getApplicationContext(),AddEvent.this);
-                            fcmNotificationsSender.SendNotifications();
-                            Intent i =new Intent(AddEvent.this,AdminHome.class);
-                            startActivity(i);
-
-
-                        }else {
-                            Toast.makeText(AddEvent.this,"Failed to Add a Event!",Toast.LENGTH_LONG).show();
-
-                        }
-
+                    if(TextUtils.isEmpty(topic) &&TextUtils.isEmpty(person)&& TextUtils.isEmpty(topic) && TextUtils.isEmpty(date1) && TextUtils.isEmpty(st_time) && TextUtils.isEmpty(ed_time) && TextUtils.isEmpty(ven)){
+                        Toast.makeText(AddEvent.this,"Please Fill Required fields!",Toast.LENGTH_SHORT).show();
                     }
-                });
+                    else {
 
+                        GetEvents getEvents = new GetEvents(topic, desig, person, date1, st_time, ed_time, ven, desc, ph11, ph22, name11, name22, eventID, fl, pl);
+                        myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()) {
+                                    Topic.setText("");
+                                    date.setText("");
+                                    ph1.setText("");
+                                    ph2.setText("");
+                                    venue.setText("");
+                                    Person.setText("");
+                                    name2.setText("");
+                                    end_time.setText("");
+                                    start_time.setText("");
+                                    description.setText("");
+                                    name1.setText("");
+                                    flink.setText("");
+                                    plink.setText("");
+                                    Toast.makeText(AddEvent.this, "Event Added!", Toast.LENGTH_SHORT).show();
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                                        NotificationChannel notificationChannel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+                                        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                                        notificationManager.createNotificationChannel(notificationChannel);
+                                    }
+
+                                    FcmNotificationsSender fcmNotificationsSender = new FcmNotificationsSender("/topics/general", "A new Event Scheduled", topic, getApplicationContext(), AddEvent.this);
+                                    fcmNotificationsSender.SendNotifications();
+                                    Intent i = new Intent(AddEvent.this, AdminHome.class);
+                                    startActivity(i);
+
+
+                                } else {
+                                    Toast.makeText(AddEvent.this, "Failed to Add a Event!", Toast.LENGTH_LONG).show();
+
+                                }
+
+                            }
+                        });
+                    }
             }
 
 

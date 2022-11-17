@@ -134,6 +134,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
                             Toast.makeText(EditEvents.this,"Event Updated!",Toast.LENGTH_SHORT).show();
                             Intent i =new Intent(EditEvents.this,AdminHome.class);
                             startActivity(i);
+                            finish();
                         }else {
                             Toast.makeText(EditEvents.this,"Failed to Update Event!",Toast.LENGTH_LONG).show();
 
@@ -157,6 +158,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
         Toast.makeText(EditEvents.this,"Event Deleted!",Toast.LENGTH_LONG).show();
         Intent i =new Intent(EditEvents.this,AdminHome.class);
         startActivity(i);
+        finish();
     }
 
     @Override

@@ -92,10 +92,9 @@ public class loginActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 intentProtector(em);
 
-
                             }else{
                                 loadingPB.setVisibility(View.GONE);
-                                Toast.makeText(loginActivity.this,"Failed! Please Check your Credentials",Toast.LENGTH_LONG).show();
+                                Toast.makeText(loginActivity.this,task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
 
                             }
                         }
@@ -140,16 +139,5 @@ public class loginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser user=mauth.getCurrentUser();
-        if(user!=null) {
-
-           intentProtector(user.getEmail());
-
-        }
-
-    }
 
 }

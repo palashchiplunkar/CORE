@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
-            android:layout_marginTop="46dp"
+
             android:layout_marginBottom="10dp"
             android:text="Update Event Information"
             android:textColor="@color/black"

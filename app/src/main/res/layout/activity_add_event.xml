@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
-            android:layout_marginTop="46dp"
+
             android:layout_marginBottom="10dp"
             android:text="Add Event Information"
             android:textColor="@color/black"
@@ -35,7 +35,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Topic">
+            android:hint="Topic *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/topic"
@@ -53,7 +53,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Resource Person">
+            android:hint="Resource Person *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/person"
@@ -67,7 +67,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date">
+            android:hint="Date *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/date"
@@ -82,7 +82,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Start Time">
+            android:hint="Start Time *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/time"
@@ -96,7 +96,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="End Time">
+            android:hint="End Time *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/end_time"
@@ -111,7 +111,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Venue">
+            android:hint="Venue *">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/venue"
@@ -139,7 +139,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Form Link">
+            android:hint="Registration Form Link">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/formLink"
@@ -153,7 +153,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Poster Link">
+            android:hint="Event Poster Link">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/posterLink"
