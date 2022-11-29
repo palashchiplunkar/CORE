@@ -79,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadingPB.setVisibility(View.VISIBLE);
+                reg_button.setEnabled(false);
                 String em=email.getText().toString();
                 String na=name.getText().toString();
                 String us=usn.getText().toString();
@@ -87,9 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
                 System.out.println(em);
                 if(!pa.equals(cpa)){
                     loadingPB.setVisibility(View.GONE);
+                    reg_button.setEnabled(true);
                     Toast.makeText(RegisterActivity.this,"Password Didn't Match!",Toast.LENGTH_LONG).show();
                 }else if(TextUtils.isEmpty(em) && TextUtils.isEmpty(na) && TextUtils.isEmpty(us) && TextUtils.isEmpty(pa) && TextUtils.isEmpty(cpa)){
                     loadingPB.setVisibility(View.GONE);
+                    reg_button.setEnabled(true);
                     Toast.makeText(RegisterActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
                 }else{
                     mauth.createUserWithEmailAndPassword(em,pa).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -110,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 loadingPB.setVisibility(View.GONE);
+                                                reg_button.setEnabled(true);
                                                 Toast.makeText(RegisterActivity.this,"Registration Done!",Toast.LENGTH_LONG).show();
                                                 Intent i=new Intent(RegisterActivity.this,loginActivity.class);
                                                 startActivity(i);
@@ -124,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }else{
                                 loadingPB.setVisibility(View.GONE);
-
+                                reg_button.setEnabled(true);
                                 Toast.makeText(RegisterActivity.this,task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
 
                             }

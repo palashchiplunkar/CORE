@@ -7,101 +7,183 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
     android:fadeScrollbars="false"
-    android:scrollbarSize="10dp">
+    android:scrollbarSize="10dp"
+    android:id="@+id/frag_home">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:weightSum="3"
         >
-
-
         <ImageView
-
-
-            android:layout_width="62dp"
-            android:layout_height="78dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/mite"
-
+android:layout_weight="1"
             />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="190dp"
-            android:layout_height="87dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="MANGALORE INSTITUTE OF TECHNOLOGY &amp; ENGINEERING"
             android:textAlignment="center"
+            android:textColor="@color/black"
+android:layout_weight="1"
             android:textSize="15dp" />
-
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center "
+            android:text="Accredited by NAAC with A+ Grade, An ISO 9001: 2015 Certified Institution"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:layout_weight="1"
+            android:textSize="10dp" />
+        </LinearLayout>
         <ImageView
-
-
-            android:layout_width="79dp"
-            android:layout_height="109dp"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:src="@drawable/core1"
-
+android:layout_weight="1"
             />
     </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Department of Computer Science and Engineering"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="@color/background"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="(Accredited By NBA)"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="CORE - Student Association of CS &amp; E"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="@color/background"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:sliderAnimationDuration="2000"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="@color/background"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true"
+                />
+
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="20dp">
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/evntbt"
-                android:layout_width="199dp"
+                android:id="@+id/upcoming"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:backgroundTint="#670202"
                 android:elevation="10dp"
-                android:text="TODAYS EVENT"
+
+                android:text="Upcoming Events"
                 app:cornerRadius="20dp" />
-
-
-
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/reportbt"
-                    android:layout_width="169dp"
-                    android:layout_height="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:layout_weight="5"
+                    android:layout_weight="1"
                     android:backgroundTint="#670202"
                     android:elevation="10dp"
-                    android:text="Previous Report"
+                    android:text="Previous Year Report"
                     app:cornerRadius="20dp" />
 
 
         </LinearLayout>
-<TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Brief About CORE : -"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/background"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <TextView
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:text="Computer Organization of Resourceful Engineers is a Student Association of Computer Science &amp; Engineering Department, which is established to provide a platform for the student community to express their talent and engage students in latest technologies. CORE organizes various Technical events on the latest technologies for enhancing students’ knowledge with respect to all latest trends in industry. CORE also organizes various non-technical events and provides a platform for students to showcase their talents and help to bring out the hidden talents of students."
-    android:layout_gravity="center_horizontal|center"
+    android:text="@string/about"
+    android:layout_margin="20dp"
+    android:justificationMode="inter_word"
+    android:textColor="@color/black"
     android:gravity="center"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/memberbt"
             android:layout_width="374dp"
             android:layout_height="57dp"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="5"
             android:backgroundTint="#670202"
             android:elevation="10dp"
-            android:text="OFFICE BEARERS"
-            app:cornerRadius="20dp" />
+            android:text="VIEW OFFICE BEARERS"
+            app:cornerRadius="20dp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>

@@ -34,6 +34,7 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
     DatabaseReference myRef;
     GetEvents getEvents;
     Button signout;
+    FloatingActionButton upload_btn;
     FirebaseAuth mauth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,14 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
         eventList=findViewById(R.id.eventsView);
         loadingPB=findViewById(R.id.PBLoading);
         signout=findViewById(R.id.signout_admin);
+        upload_btn=findViewById(R.id.upload_btn_home);
+        upload_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),UploadActivity.class);
+                startActivity(i);
+            }
+        });
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

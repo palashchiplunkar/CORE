@@ -33,5 +33,8 @@
     <string name="desc">This the peer learning session on the cloud computing and the BigData Analysis.Which is widely used in the current era.Used in the area of statistical user view detection and in the market analysis against the previous data.</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="about">
+        CORE – Computer Organization of Resourceful Engineers is a Student Association of Computer Science and Engineering Department, which is established to provide a platform for the student community to express their talent and engage students in latest technologies. CORE organizes various Technical events on the latest technologies for enhancing students’ knowledge with respect to all latest trends in industry. CORE also organizes various non-technical events and provides a platform for students to showcase their talents and help to bring out the hidden talents of students.
+    </string>
 
 </resources>

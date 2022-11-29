@@ -79,10 +79,12 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadingPB.setVisibility(View.VISIBLE);
+                signin.setEnabled(false);
                 String em=email.getText().toString();
                 String pa=pass.getText().toString();
                 if(TextUtils.isEmpty(em) && TextUtils.isEmpty(pa)){
                     loadingPB.setVisibility(View.GONE);
+                    signin.setEnabled(true);
                     Toast.makeText(loginActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
                     return;
                 }else{
@@ -94,6 +96,7 @@ public class loginActivity extends AppCompatActivity {
 
                             }else{
                                 loadingPB.setVisibility(View.GONE);
+                                signin.setEnabled(true);
                                 Toast.makeText(loginActivity.this,task.getException().getMessage().toString(),Toast.LENGTH_LONG).show();
 
                             }

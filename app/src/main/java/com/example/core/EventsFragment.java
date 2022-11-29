@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseOptions;
@@ -35,19 +36,20 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
     ArrayList<GetEvents> list;
     ProgressBar loadingPB;
     DatabaseReference myRef;
-
+    TextView message;
     GetEvents getEvents;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View v=inflater.inflate(R.layout.fragment_events, container, false);
         FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
         myRef=database.getReference("events");
         eventList=v.findViewById(R.id.eventsViewUser);
         loadingPB=v.findViewById(R.id.PBLoading);
+        message=v.findViewById(R.id.no_events);
+        message.setHint("");
+        loadingPB.setVisibility(View.VISIBLE);
         list=new ArrayList<>();
         EventAdapterUser eventAdapterUser=new EventAdapterUser(list,getContext(),this);
         eventList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -58,7 +60,10 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 loadingPB.setVisibility(View.GONE);
                 getEvents =dataSnapshot.getValue(GetEvents.class);
-                list.add(getEvents);
+                if(dataSnapshot.exists()) {
+                    list.add(getEvents);
+                }
+                //System.out.println("Hello");
                 eventAdapterUser.notifyDataSetChanged();
             }
 
@@ -71,6 +76,7 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 loadingPB.setVisibility(View.GONE);
+
                 eventAdapterUser.notifyDataSetChanged();
             }
 
@@ -85,6 +91,8 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
 
             }
         });
+
+
         return v;
     }
 

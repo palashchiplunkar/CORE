@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.core">
+    package="com.example.core" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,7 +15,14 @@
         android:roundIcon="@drawable/core"
         android:supportsRtl="true"
         android:theme="@style/Theme.CORE"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".UploadActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ForgotPass"
             android:exported="false"
@@ -23,16 +30,19 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".view_details"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
-            android:exported="false"
-            android:theme="@style/Theme.CORE.NoActionBar">
+            android:exported="true"
+            android:theme="@style/Theme.CORE.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".AdminView"
@@ -47,7 +57,6 @@
             android:name=".loginActivity"
             android:exported="false"
             android:theme="@style/Theme.CORE.NoActionBar" />
-
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
@@ -57,12 +66,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false" >
         </activity>
         <activity
             android:name=".adminLogin"
@@ -71,7 +75,7 @@
 
         <service
             android:name=".MyMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
