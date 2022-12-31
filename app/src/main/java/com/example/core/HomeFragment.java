@@ -36,8 +36,6 @@ import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
-
-
     SliderView sliderView;
     ArrayList<String> urls= new ArrayList<>();
     int i=0;
@@ -46,12 +44,12 @@ public class HomeFragment extends Fragment {
 //    R.drawable.four,
 //    R.drawable.five,
 //    R.drawable.six};
-    String[] images={"https://i.ibb.co/1zLgSs9/ass11.jpg",
-        "https://pixabay.com/photos/flowers-meadow-sunlight-summer-276014/"
-    ,"https://pixabay.com/photos/road-forest-fall-autumn-season-1072823/",
-"https://cdn.pixabay.com/photo/2015/06/19/21/24/avenue-815297__340.jpg",
-"https://i.ibb.co/1zLgSs9/ass11.jpg",
-"https://cdn.pixabay.com/photo/2017/02/08/17/24/fantasy-2049567__340.jpg"};
+    String[] images={"https://images.pexels.com/photos/1632790/pexels-photo-1632790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    ,"https://images.pexels.com/photos/129743/pexels-photo-129743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+"https://images.pexels.com/photos/56875/tree-dawn-nature-bucovina-56875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+"https://images.pexels.com/photos/589841/pexels-photo-589841.jpeg?auto=compress&cs=tinysrgb&w=600",
+"https://images.pexels.com/photos/957024/forest-trees-perspective-bright-957024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"};
     Button upcoming_events,member_button,report_button;
     Uri uri = null;
     @Override

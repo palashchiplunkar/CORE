@@ -38,7 +38,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
     DatabaseReference myRef=database.getReference("events");
 
-    EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,plink,flink;
+    EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,plink,flink,felink;
     String desig,eventID;
     Button Submit_btn;
 
@@ -78,6 +78,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
         name1=findViewById(R.id.name1);
         name2=findViewById(R.id.name2);
         flink=findViewById(R.id.formLink);
+        felink=findViewById(R.id.feedLink);
         plink=findViewById(R.id.posterLink);
         Submit_btn=findViewById(R.id.submit_btn);
         Submit_btn.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +98,8 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     String name22=name2.getText().toString();
                     String pl=plink.getText().toString();
                     String fl=flink.getText().toString();
+                    String fel=felink.getText().toString();
+                    System.out.println(fel);
                     eventID=topic;
 
                     if(TextUtils.isEmpty(topic) &&TextUtils.isEmpty(person)&& TextUtils.isEmpty(topic) && TextUtils.isEmpty(date1) && TextUtils.isEmpty(st_time) && TextUtils.isEmpty(ed_time) && TextUtils.isEmpty(ven)){
@@ -104,7 +107,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     }
                     else {
 
-                        GetEvents getEvents = new GetEvents(topic, desig, person, date1, st_time, ed_time, ven, desc, ph11, ph22, name11, name22, eventID, fl, pl);
+                        GetEvents getEvents = new GetEvents(topic, desig, person, date1, st_time, ed_time, ven, desc, ph11, ph22, name11, name22, eventID, fl, pl,fel);
                         myRef.child(eventID).setValue(getEvents).addOnCompleteListener(new OnCompleteListener() {
                             @Override
                             public void onComplete(@NonNull Task task) {
@@ -122,6 +125,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                                     name1.setText("");
                                     flink.setText("");
                                     plink.setText("");
+                                    felink.setText("");
                                     Toast.makeText(AddEvent.this, "Event Added!", Toast.LENGTH_SHORT).show();
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 

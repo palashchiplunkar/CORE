@@ -22,7 +22,7 @@ public class view_details extends AppCompatActivity {
     ProgressBar loadingPB;
     TextView Topic_user,Person_user,date_user,description_user,end_time_user,start_time_user,name1_user,ph1_user,ph2_user,name2_user,venue_user,flink_user,plink_user;
     String desig_user,eventID_user;
-    Button download_btn_user,register_btn_user;
+    Button download_btn_user,register_btn_user,feedback_btn;
     private GetEvents getEvents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class view_details extends AppCompatActivity {
         name2_user=findViewById(R.id.handlerName2);
         register_btn_user=findViewById(R.id.register_btn_user);
         download_btn_user=findViewById(R.id.poster_download);
+        feedback_btn=findViewById(R.id.feedback_btn_user);
         getEvents=getIntent().getParcelableExtra("events");
         if(getEvents!=null){
             Topic_user.setText(getEvents.getTopic());
@@ -104,5 +105,18 @@ public class view_details extends AppCompatActivity {
                 }
             }
         });
-    }
+        feedback_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    String url = getEvents.getFeedLink();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),"No details found",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });    }
 }

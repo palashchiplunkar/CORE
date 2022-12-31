@@ -368,14 +368,22 @@
 
             android:text="Register Here"
             app:cornerRadius="20dp" />
-
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/back_btn"
-            android:layout_width="wrap_content"
+            android:id="@+id/feedback_btn_user"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:text="Back"
+            android:backgroundTint="#670202"
+
+            android:text="Feedback"
             app:cornerRadius="20dp" />
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/back_btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="@color/black"-->
+<!--            android:text="Back"-->
+<!--            app:cornerRadius="20dp" />-->
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
