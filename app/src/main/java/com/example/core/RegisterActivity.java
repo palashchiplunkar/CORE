@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
     DatabaseReference myRef=database.getReference("users");
     ProgressBar loadingPB;
+    boolean flag=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,20 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String pa=pass.getText().toString();
                 String cpa=cpass.getText().toString();
                 matcher=usn_regex.matcher(us);
-                if(!pa.equals(cpa)){
-                    loadingPB.setVisibility(View.GONE);
-                    reg_button.setEnabled(true);
-                    Toast.makeText(RegisterActivity.this,"Password Didn't Match!",Toast.LENGTH_LONG).show();
-                }else if(TextUtils.isEmpty(em) && TextUtils.isEmpty(na) && TextUtils.isEmpty(us) && TextUtils.isEmpty(pa) && TextUtils.isEmpty(cpa)){
-                    loadingPB.setVisibility(View.GONE);
-                    reg_button.setEnabled(true);
-                    Toast.makeText(RegisterActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
-                }
-                else if(!matcher.matches()){
-                    loadingPB.setVisibility(View.GONE);
-                    reg_button.setEnabled(true);
-                    Toast.makeText(RegisterActivity.this,"Incorrect USN format",Toast.LENGTH_LONG).show();
-                }else{
+                if(checkFields(em,na,us,pa,cpa,matcher))
                     mauth.createUserWithEmailAndPassword(em,pa).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -117,8 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 users.put("year",year_submit[0]);
                                 users.put("section",section_submit[0]);
                                 users.put("isAdmin","false");
-                                    //GetUsers getUsers=new GetUsers(em,na,us);
-                                    //String stamp=Long.toString(System.currentTimeMillis());
+
                                     myRef.child("year-"+year_submit[0]).child(section_submit[0]).push().setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -145,7 +132,6 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
-                }
             }
         });
         signin.setOnClickListener(new View.OnClickListener() {
@@ -156,5 +142,26 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
+    private boolean checkFields(String em,String na,String us,String pa,String cpa,Matcher matcher){
+        if(!pa.equals(cpa)){
+            loadingPB.setVisibility(View.GONE);
+            reg_button.setEnabled(true);
+            Toast.makeText(RegisterActivity.this,"Password Didn't Match!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        System.out.println(TextUtils.isEmpty(em));
+        if(TextUtils.isEmpty(em) || TextUtils.isEmpty(na) || TextUtils.isEmpty(us) || TextUtils.isEmpty(pa) || TextUtils.isEmpty(cpa)){
+            loadingPB.setVisibility(View.GONE);
+            reg_button.setEnabled(true);
+            Toast.makeText(RegisterActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(!matcher.matches()) {
+            loadingPB.setVisibility(View.GONE);
+            reg_button.setEnabled(true);
+            Toast.makeText(RegisterActivity.this, "Incorrect USN format", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
 }

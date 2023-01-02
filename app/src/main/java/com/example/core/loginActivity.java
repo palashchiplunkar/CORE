@@ -52,9 +52,7 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-
+        
         loadingPB=findViewById(R.id.PBLoading);
         register=findViewById(R.id.register_btn);
         forgot_pass=findViewById(R.id.forgot_pass);
@@ -82,7 +80,7 @@ public class loginActivity extends AppCompatActivity {
                 signin.setEnabled(false);
                 String em=email.getText().toString();
                 String pa=pass.getText().toString();
-                if(TextUtils.isEmpty(em) && TextUtils.isEmpty(pa)){
+                if(TextUtils.isEmpty(em) || TextUtils.isEmpty(pa)){
                     loadingPB.setVisibility(View.GONE);
                     signin.setEnabled(true);
                     Toast.makeText(loginActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
