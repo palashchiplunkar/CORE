@@ -52,7 +52,7 @@ public class loginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
         loadingPB=findViewById(R.id.PBLoading);
         register=findViewById(R.id.register_btn);
         forgot_pass=findViewById(R.id.forgot_pass);

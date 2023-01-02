@@ -48,13 +48,18 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
         eventList=v.findViewById(R.id.eventsViewUser);
         loadingPB=v.findViewById(R.id.PBLoading);
         message=v.findViewById(R.id.no_events);
-        message.setHint("");
         loadingPB.setVisibility(View.VISIBLE);
         list=new ArrayList<>();
         EventAdapterUser eventAdapterUser=new EventAdapterUser(list,getContext(),this);
         eventList.setLayoutManager(new LinearLayoutManager(getContext()));
         eventList.setAdapter(eventAdapterUser);
         list.clear();
+        eventAdapterUser.notifyDataSetChanged();
+        if(list.isEmpty()){
+            loadingPB.setVisibility(View.GONE);
+            message.setVisibility(View.VISIBLE);
+            eventList.setVisibility(View.GONE);
+        }
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -65,6 +70,9 @@ public class EventsFragment extends Fragment implements EventAdapterUser.EventCl
                 }
                 //System.out.println("Hello");
                 eventAdapterUser.notifyDataSetChanged();
+                loadingPB.setVisibility(View.GONE);
+                message.setVisibility(View.GONE);
+                eventList.setVisibility(View.VISIBLE);
             }
 
             @Override

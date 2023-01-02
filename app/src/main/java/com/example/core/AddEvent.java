@@ -138,7 +138,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                                     fcmNotificationsSender.SendNotifications();
                                     Intent i = new Intent(AddEvent.this, AdminHome.class);
                                     startActivity(i);
-
+                                    finish();
 
                                 } else {
                                     Toast.makeText(AddEvent.this, "Failed to Add a Event!", Toast.LENGTH_LONG).show();

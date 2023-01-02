@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -35,6 +36,7 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
     GetEvents getEvents;
     Button signout;
     FloatingActionButton upload_btn;
+    TextView message;
     FirebaseAuth mauth=FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
         addEvent=findViewById(R.id.addEvent);
         eventList=findViewById(R.id.eventsView);
         loadingPB=findViewById(R.id.PBLoading);
+        message=findViewById(R.id.no_events_admin);
         signout=findViewById(R.id.signout_admin);
         upload_btn=findViewById(R.id.upload_btn_home);
         upload_btn.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +79,11 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
         eventList.setLayoutManager(new LinearLayoutManager(this));
         eventList.setAdapter(eventAdapter);
         getAllEvents();
+        if(list.isEmpty()){
+            loadingPB.setVisibility(View.GONE);
+            message.setVisibility(View.VISIBLE);
+            eventList.setVisibility(View.GONE);
+        }
     }
 
     private void getAllEvents() {
@@ -87,6 +95,9 @@ public class AdminHome extends AppCompatActivity implements EventAdapter.EventCl
                 getEvents=dataSnapshot.getValue(GetEvents.class);
                 list.add(getEvents);
                 eventAdapter.notifyDataSetChanged();
+                loadingPB.setVisibility(View.GONE);
+                message.setVisibility(View.GONE);
+                eventList.setVisibility(View.VISIBLE);
             }
 
             @Override
