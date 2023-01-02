@@ -33,6 +33,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
@@ -41,7 +43,8 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
     EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,plink,flink,felink;
     String desig,eventID;
     Button Submit_btn;
-
+    Pattern date_pattern;
+    Matcher date_matcher;
 
 
     @Override
@@ -66,6 +69,7 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+        date_pattern=Pattern.compile("^\\d{2}/\\d{2}/\\d{4}$");
         Topic=findViewById(R.id.topic);
         Person=findViewById(R.id.person);
         date=findViewById(R.id.date);
@@ -101,9 +105,12 @@ public class AddEvent extends AppCompatActivity implements AdapterView.OnItemSel
                     String fel=felink.getText().toString();
                     System.out.println(fel);
                     eventID=topic;
-
-                    if(TextUtils.isEmpty(topic) &&TextUtils.isEmpty(person)&& TextUtils.isEmpty(topic) && TextUtils.isEmpty(date1) && TextUtils.isEmpty(st_time) && TextUtils.isEmpty(ed_time) && TextUtils.isEmpty(ven)){
+                    date_matcher=date_pattern.matcher(date1);
+                    if(TextUtils.isEmpty(topic) ||TextUtils.isEmpty(person)|| TextUtils.isEmpty(topic) || TextUtils.isEmpty(date1) || TextUtils.isEmpty(st_time) || TextUtils.isEmpty(ed_time) || TextUtils.isEmpty(ven)){
                         Toast.makeText(AddEvent.this,"Please Fill Required fields!",Toast.LENGTH_SHORT).show();
+                    }else if(!date_matcher.matches()){
+                        Toast.makeText(AddEvent.this,"Incorrect Date Format!",Toast.LENGTH_SHORT).show();
+
                     }
                     else {
 

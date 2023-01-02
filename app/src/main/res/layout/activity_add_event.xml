@@ -67,7 +67,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date *">
+            android:hint="Date * (DD/MM/YYYY)">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/date"
