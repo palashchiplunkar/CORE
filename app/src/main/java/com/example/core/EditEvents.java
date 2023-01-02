@@ -30,7 +30,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
     DatabaseReference myRef;
     ProgressBar loadingPB;
-    EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,flink,plink;
+    EditText Topic,Person,date,description,end_time,start_time,name1,ph1,ph2,name2,venue,flink,plink,felink;
     String desig,eventID;
     Button update_btn,delete_btn;
     private GetEvents getEvents;
@@ -58,6 +58,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
         name2=findViewById(R.id.name2);
         flink=findViewById(R.id.formLink);
         plink=findViewById(R.id.posterLink);
+        felink=findViewById(R.id.feedLink);
         update_btn=findViewById(R.id.update_btn);
         delete_btn=findViewById(R.id.delete_btn);
         getEvents=getIntent().getParcelableExtra("events");
@@ -75,6 +76,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
             name2.setText(getEvents.getEventHandlerName2());
             flink.setText(getEvents.getFormLink());
             plink.setText(getEvents.getPosterLink());
+            felink.setText(getEvents.getFeedLink());
             eventID=getEvents.getEventsId();
         }
         //System.out.println(eventID);
@@ -95,8 +97,9 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
                 String name11=name1.getText().toString();
                 String name22=name2.getText().toString();
                 String pl=plink.getText().toString();
-                System.out.println(plink.getText().toString());
+                System.out.println(felink.getText().toString());
                 String fl=flink.getText().toString();
+                String fel=felink.getText().toString();
                 HashMap map=new HashMap();
                 map.put("date",date1);
                 map.put("description",desc);
@@ -110,6 +113,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
                 map.put("formLink",fl);
                 map.put("person",person);
                 map.put("posterLink",pl);
+                map.put("feedLink",fel);
                 map.put("startTime",st_time);
                 map.put("topic",topic);
                 map.put("venue",ven);
@@ -131,6 +135,7 @@ public class EditEvents extends AppCompatActivity implements AdapterView.OnItemS
                             name1.setText("");
                             flink.setText("");
                             plink.setText("");
+                            felink.setText("");
                             Toast.makeText(EditEvents.this,"Event Updated!",Toast.LENGTH_SHORT).show();
                             Intent i =new Intent(EditEvents.this,AdminHome.class);
                             startActivity(i);

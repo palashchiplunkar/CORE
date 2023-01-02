@@ -28,9 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.security.Timestamp;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     Button signin, reg_button;
+    Pattern usn_regex;
+    Matcher matcher;
     EditText email, pass, cpass, name, usn;
     FirebaseAuth mauth;
     FirebaseDatabase database=FirebaseDatabase.getInstance("https://core-72194-default-rtdb.firebaseio.com/");
@@ -48,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         String[] section=new String[]{
                 "CS1","CS2","CS3"
         };
+        usn_regex=Pattern.compile("\\d[a-zA-Z][a-zA-Z]\\d\\d[a-zA-Z][a-zA-Z]\\d\\d\\d");
         ArrayAdapter<String> year_adapter =new ArrayAdapter<>(this,R.layout.drop_down_item,year);
         ArrayAdapter<String> section_adapter =new ArrayAdapter<>(this,R.layout.drop_down_item,section);
         AutoCompleteTextView yr= findViewById(R.id.year);
@@ -80,12 +85,13 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loadingPB.setVisibility(View.VISIBLE);
                 reg_button.setEnabled(false);
+
                 String em=email.getText().toString();
                 String na=name.getText().toString();
                 String us=usn.getText().toString();
                 String pa=pass.getText().toString();
                 String cpa=cpass.getText().toString();
-                System.out.println(em);
+                matcher=usn_regex.matcher(us);
                 if(!pa.equals(cpa)){
                     loadingPB.setVisibility(View.GONE);
                     reg_button.setEnabled(true);
@@ -94,6 +100,11 @@ public class RegisterActivity extends AppCompatActivity {
                     loadingPB.setVisibility(View.GONE);
                     reg_button.setEnabled(true);
                     Toast.makeText(RegisterActivity.this,"Fields Should Not Be Empty!",Toast.LENGTH_LONG).show();
+                }
+                else if(!matcher.matches()){
+                    loadingPB.setVisibility(View.GONE);
+                    reg_button.setEnabled(true);
+                    Toast.makeText(RegisterActivity.this,"Incorrect USN format",Toast.LENGTH_LONG).show();
                 }else{
                     mauth.createUserWithEmailAndPassword(em,pa).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

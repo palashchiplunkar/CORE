@@ -4,12 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class GetEvents implements Parcelable {
-    private String Topic,Designation,Person,Date,StartTime,EndTime,Venue,Description,EventHandlerPh1,EventHandlerPh2,EventHandlerName1,EventHandlerName2,EventsId,FormLink,PosterLink;
+    private String Topic,Designation,Person,Date,StartTime,EndTime,Venue,Description,EventHandlerPh1,EventHandlerPh2,EventHandlerName1,EventHandlerName2,EventsId,FormLink,PosterLink,FeedLink;
 
     public GetEvents(){
 
     }
-    public GetEvents(String topic, String designation, String person, String date, String startTime, String endTime, String venue, String description, String eventHandlerPh1, String eventHandlerPh2, String eventHandlerName1, String eventHandlerName2, String eventsId, String formLink, String posterLink) {
+    public GetEvents(String topic, String designation, String person, String date, String startTime, String endTime, String venue, String description, String eventHandlerPh1, String eventHandlerPh2, String eventHandlerName1, String eventHandlerName2, String eventsId, String formLink, String posterLink,String feedLink) {
         Topic = topic;
         Designation = designation;
         Person = person;
@@ -25,6 +25,7 @@ public class GetEvents implements Parcelable {
         EventsId = eventsId;
         FormLink=formLink;
         PosterLink=posterLink;
+        FeedLink=feedLink;
     }
 
     protected GetEvents(Parcel in) {
@@ -43,6 +44,7 @@ public class GetEvents implements Parcelable {
         EventsId = in.readString();
         FormLink=in.readString();
         PosterLink=in.readString();
+        FeedLink= in.readString();
     }
 
     public static final Creator<GetEvents> CREATOR = new Creator<GetEvents>() {
@@ -176,7 +178,12 @@ public class GetEvents implements Parcelable {
     public void setPosterLink(String posterLink) {
         PosterLink = posterLink;
     }
-
+    public String getFeedLink() {
+        return  FeedLink;
+    }
+    public void setFeedLink(String feedLink){
+        FeedLink=feedLink;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -199,5 +206,6 @@ public class GetEvents implements Parcelable {
         parcel.writeString(EventsId);
         parcel.writeString(FormLink);
         parcel.writeString(PosterLink);
+        parcel.writeString(FeedLink);
     }
 }

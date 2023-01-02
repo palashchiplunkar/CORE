@@ -140,10 +140,23 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Form Link">
+            android:hint="Updated Form Link">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/formLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_text_field_design50"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Updated Feedback Link">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/feedLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -154,7 +167,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Poster Link">
+            android:hint="Updated Poster Link">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/posterLink"
